@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-catalog-api
+  labels:
+    app: eos-catalog-api
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-catalog-api
+  template:
+    metadata:
+      labels:
+        app: eos-catalog-api
+    spec:
+      containers:
+      - name: eos-catalog-api
+        image: docker.io/dpthub/eos-catalog-api:latest
+        ports:
+        - containerPort: 8081
