@@ -1,0 +1,16 @@
+# Deploy ClusterIP Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-gateway-api-service
+  labels:
+    app: eos-gateway-api
+
+spec:
+  selector:
+    app: eos-gateway-api
+
+  type: ClusterIP
+  ports:
+  - port: 5555
+    targetPort: 5555

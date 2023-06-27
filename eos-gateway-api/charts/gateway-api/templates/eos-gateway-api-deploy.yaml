@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-gateway-api
+  labels:
+    app: eos-gateway-api
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-gateway-api
+  template:
+    metadata:
+      labels:
+        app: eos-gateway-api
+    spec:
+      containers:
+      - name: eos-gateway-api
+        image: docker.io/dpthub/eos-gateway-api:latest
+        ports:
+        - containerPort: 5555
