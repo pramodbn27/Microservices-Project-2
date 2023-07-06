@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-micro-services-admin
+  labels:
+    app: eos-micro-services-admin
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-micro-services-admin
+  template:
+    metadata:
+      labels:
+        app: eos-micro-services-admin
+    spec:
+      containers:
+      - name: eos-micro-services-admin
+        image: docker.io/dpthub/eos-micro-services-admin:latest
+        ports:
+        - containerPort: 8090
