@@ -1,0 +1,17 @@
+# Deploy ClusterIP Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-order-api-service
+  labels:
+    app: eos-order-api
+
+spec:
+  selector:
+    app: eos-order-api
+
+  type: ClusterIP
+  ports:
+  - port: 8084
+    targetPort: 8084
+
