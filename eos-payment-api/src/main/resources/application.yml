@@ -1,0 +1,39 @@
+server:
+  port: 8083
+
+spring:
+  boot:
+       admin:
+            client:
+              url: http://eos-micro-services-admin-service:8090
+              instance:
+                service-base-url: http://eos-payment-api-service:8083
+  application:
+    name: eos-payment-api-service
+  cloud:
+    config:
+      uri: http://eos-cloud-config-api-service:8888 
+  config:
+    import: optional:configserver:http://eos-cloud-config-api-service.prod.svc.cluster.local:8888/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eos-registry-api-service:8761/eureka/ 
+    registerWithEureka: true
+    fetchRegistry: true
+    enabled: true
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    hostname: eos-payment-api-service 
+    preferIpAddress: false
+
+management:
+  endpoints:
+         web:
+            exposure:
+                 include: "*"
+  endpoint:
+         health:
+            show-details: always
+  security:
+    enabled: false
