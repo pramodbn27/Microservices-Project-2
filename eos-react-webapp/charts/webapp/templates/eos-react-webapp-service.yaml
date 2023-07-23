@@ -1,0 +1,17 @@
+# Deploy ClusterIP Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-react-webapp-service
+  labels:
+    app: eos-react-webapp
+
+spec:
+  selector:
+    app: eos-react-webapp
+
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: 3000
+
