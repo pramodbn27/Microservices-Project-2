@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-registry-api
+  labels:
+    app: eos-registry-api
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-registry-api
+  template:
+    metadata:
+      labels:
+        app: eos-registry-api
+    spec:
+      containers:
+      - name: eos-registry-api
+        image: docker.io/dpthub/eos-registry-api:latest
+        ports:
+        - containerPort: 8761
