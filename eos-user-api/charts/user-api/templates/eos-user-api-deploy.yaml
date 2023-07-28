@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-user-api
+  labels:
+    app: eos-user-api
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-user-api
+  template:
+    metadata:
+      labels:
+        app: eos-user-api
+    spec:
+      containers:
+      - name: eos-user-api
+        image: docker.io/dpthub/eos-user-api:latest
+        ports:
+        - containerPort: 8085
