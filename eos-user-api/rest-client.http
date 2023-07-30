@@ -1,0 +1,23 @@
+GET {{url}}:8085/actuator/health
+##
+
+PUT {{url}}:8085/v1/user/register
+Content-Type: application/json
+
+{
+ "username": "prreddy",
+ "password": "pr123",
+ "email": "trainings@edwiki.in",
+ "mobile": 9886937373
+}
+
+##
+PUT {{url}}:8085/v1/user/login
+Content-Type: application/json
+
+{
+ "username": "prreddy",
+ "password": "pr123"
+}
+
+
