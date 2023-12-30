@@ -1,0 +1,54 @@
+server:
+  port: 5555
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eos-registry-api-service:8761/eureka/ 
+    registerWithEureka: true
+    fetchRegistry: true
+    enabled: true
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    hostname: eos-gateway-api-service
+    preferIpAddress: false
+management:
+    endpoints:
+         web:
+            exposure:
+                 include: "*"
+    endpoint:
+         health:
+              show-details: always
+spring:
+  boot:
+       admin:
+            client:
+                url: http://eos-micro-services-admin-service:8090
+                instance:
+                  service-base-url: http://eos-gateway-api-service:5555
+  application:
+    name: eos-gateway-api
+  cloud:
+    gateway:
+      routes:
+        - id: eos-catalog-api-service
+          uri: lb://eos-catalog-api-service/
+          predicates:
+            - Path=/v1/catalog/**
+        - id: eos-kart-api-service
+          uri: lb://eos-kart-api-service/
+          predicates:
+            - Path=/v1/kart/**
+        - id: eos-payment-api-service
+          uri: lb://eos-payment-api-service/
+          predicates:
+            - Path=/v1/payment/**
+        - id: eos-order-api-service
+          uri: lb://eos-order-api-service/
+          predicates:
+            - Path=/v1/order/**
+        - id: eos-user-api
+          uri: http://eos-user-api-service:8085/
+          predicates:
+            - Path=/v1/user/**

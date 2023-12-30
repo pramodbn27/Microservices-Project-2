@@ -1,0 +1,17 @@
+# Deploy ClusterIP Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-cloud-config-api-service
+  labels:
+    app: eos-cloud-config-api
+
+spec:
+  selector:
+    app: eos-cloud-config-api
+
+  type: ClusterIP
+  ports:
+  - port: 8888
+    targetPort: 8888
+

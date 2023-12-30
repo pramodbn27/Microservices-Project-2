@@ -1,0 +1,39 @@
+spring:
+  boot:
+       admin:
+            client:
+                url: http://eos-micro-services-admin-service:8090
+                instance:
+                  service-base-url: http://eos-cloud-config-api-service:8888
+  application:
+    name: eos-cloud-config-api
+  cloud:
+    config:
+      server:
+        git:
+          uri: /etc/eos-cloud-config-repo 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eos-registry-api-service:8761/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+    enabled: true
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    hostname: eos-cloud-config-api-service 
+    preferIpAddress: false 
+management:
+  endpoints:
+         web:
+            exposure:
+                 include: "*"
+  endpoint:
+         health:
+            show-details: always
+  security:
+    enabled: false
+
+server:
+  port: 8888
+
