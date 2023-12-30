@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-react-webapp
+  labels:
+    app: eos-react-webapp
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-react-webapp
+  template:
+    metadata:
+      labels:
+        app: eos-react-webapp
+    spec:
+      containers:
+      - name: eos-react-webapp
+        image: docker.io/dpthub/eos-react-webapp:latest
+        ports:
+        - containerPort: 3000

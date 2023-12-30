@@ -1,0 +1,17 @@
+# Deploy ClusterIP Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: eos-micro-services-admin-service
+  labels:
+    app: eos-micro-services-admin
+
+spec:
+  selector:
+    app: eos-micro-services-admin
+
+  type: ClusterIP
+  ports:
+  - port: 8090
+    targetPort: 8090
+

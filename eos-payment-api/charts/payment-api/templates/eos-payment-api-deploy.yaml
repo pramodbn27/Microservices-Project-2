@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-payment-api
+  labels:
+    app: eos-payment-api
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-payment-api
+  template:
+    metadata:
+      labels:
+        app: eos-payment-api
+    spec:
+      containers:
+      - name: eos-payment-api
+        image: docker.io/dpthub/eos-payment-api:latest
+        ports:
+        - containerPort: 8083

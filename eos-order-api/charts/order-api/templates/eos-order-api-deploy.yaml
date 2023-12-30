@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eos-order-api
+  labels:
+    app: eos-order-api
+spec:
+  replicas:  {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: eos-order-api
+  template:
+    metadata:
+      labels:
+        app: eos-order-api
+    spec:
+      containers:
+      - name: eos-order-api
+        image: docker.io/dpthub/eos-order-api:latest
+        ports:
+        - containerPort: 8084
